@@ -1,5 +1,8 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.author %></p>
 <p><img src="<%= @post.image %>" width="200" ><br><%= @post.body %></p>
-<p><%= link_to 'Edit', edit_post_path(@post) %></p>
+<p>
+	<%= link_to 'Edit', edit_post_path(@post) %> | 
+	<%= link_to 'Delete', @post, method: :delete, data: { confirm: "Are you sure?" } %>
+</p>
 <p><%= link_to 'Home', root_path %></p>
