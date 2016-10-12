@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
+		@post.user = current_user
 		@post.save
 		redirect_to @post
 	end
@@ -31,8 +32,14 @@ class PostsController < ApplicationController
 
 	def destroy
 		# find_post being called before action is run
-		@post.destroy
-		redirect_to posts_path
+		if @post.user == current_user 
+			@post.destroy
+			flash[:notice] = "Post successfuly destroyed"
+			redirect_to posts_path
+		else
+			flash[:alert] = "You don't own this post, sorry"
+			redirect_to @post
+		end
 	end
 
 	private
