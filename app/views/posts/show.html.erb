@@ -18,19 +18,10 @@
 	<div class="col-md-4">
 		<div class="well">
 			<h3>Comments</h3>
-			<% @post.comments.each do |comment| %>
-				<p>
-					<strong><%= comment.author %>: </strong>
-					<%= comment.body %><br><%= link_to 'Edit', edit_post_comment_path(@post, comment) %> | <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?'} %>
-				</p>
-			<% end %>
+			<%= render @post.comments %>
 			<hr>
-			<h3>New Comment</h3>
-			<%= simple_form_for [@post, @post.comments.build] do |f| %>
-				<%= f.input :author %>
-				<%= f.input :body %>
-
-				<%= f.button :submit %>
+			<% if current_user %>
+				<%= render 'comments/form' %>
 			<% end %>
 		</div>	
 	</div>
