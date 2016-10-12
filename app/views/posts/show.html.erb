@@ -19,7 +19,7 @@
 			<% @post.comments.each do |comment| %>
 				<p>
 					<strong><%= comment.author %>: </strong>
-					<%= comment.body %> | <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?'} %>
+					<%= comment.body %><br><%= link_to 'Edit', edit_post_comment_path(@post, comment) %> | <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?'} %>
 				</p>
 			<% end %>
 			<hr>
